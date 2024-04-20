@@ -1,0 +1,23 @@
+.input-group {
+    width: 670px;
+    box-shadow:1px 1px 15px 0px #00000033;
+    border-radius:0px 21px 21px 0px;
+  }
+  
+  .searchButton {
+    border-radius: 12px;
+    background-color: #50B700B2;
+    color: white;
+    border: none;
+    box-shadow: 0px 1px 4px 3px #00000040;
+    width: 103px;
+    
+  }
+
+.dropdown-container{
+    display: flex;
+    gap: 45px;
+    margin-top: 70px;
+    justify-content: center;
+    margin-bottom: 140px;
+}

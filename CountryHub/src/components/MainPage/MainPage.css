@@ -1,0 +1,37 @@
+.country-list {
+    display: flex;
+    gap: 97px;
+    overflow-x: hidden;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 50px;
+  }
+    
+    
+  .country-list-item {
+    display: flex;
+    flex-direction: column;
+    padding: 13px;
+    padding-top: 0px;
+    box-shadow: 0px 1px 15px 0px #00000040;
+    border-radius: 12px;
+  }
+    
+    
+  .country-image {
+    width: 320px;
+    height: 200px;
+    align-self: center;
+    margin-top: 15px;
+  }
+  
+  p {
+    font-size: 17px;
+  }
+  
+  .title-text {
+    width: 320px;
+    font-size: 25px;
+    margin-top: 20px;
+  }
