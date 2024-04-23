@@ -1,34 +1,36 @@
-import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Dropdown } from 'react-bootstrap';
 import { useState } from 'react';
-import './ButtonDropDown.css'
+import { useAppDispatch } from '../../utils/hooks';
+import { getSearchedCountries } from '../../utils/action';
+import '../ButtonDropDown/ButtonDropDown.css'
 
-const ButtonDropDown = () => {
+const ButtonDropdown = () => {
 
   const [selectedCategory, setSelectedCategory] = useState('Name');
+  const [name,setName]=useState("")
+  const dispatch = useAppDispatch();
 
-  const handleDropdownItemClick = (category) => {
+
+  const handleDropdownItemClick = (category:string) => {
     setSelectedCategory(category);
   };
 
-  const handleSearchClick = async () => {
-    try {
-      const response = await fetch(`https://your-api-url/${selectedCategory}`);
-      if (!response.ok) {
-        throw new Error(`Request failed with status ${response.status}: ${response.statusText}`);
+  const handleSearchClick = () => {
+    if(name!="") {
+      let category=selectedCategory.toLowerCase()
+      if(category=="language") {
+        category="lang";
       }
-      const data = await response.json();
-      console.log(`Search results for ${selectedCategory}:`, data);
-    } catch (error) {
-      console.error('Error fetching data:', error.message);
+      dispatch(getSearchedCountries(name,category))
     }
+    
   };
-  
+
   return (
-    <div className='dropdown-container'>
-      <div className="input-group">
-        <input type="text" className="form-control" aria-label="Text input with dropdown button" />
+    <div style={{ display: 'flex', gap: '45px', marginTop: '160px', justifyContent: 'center',marginBottom:'140px'}}>
+      <div className="input-group" style={{boxShadow:'1px 1px 15px 0px #00000033',borderRadius:'0px 21px 21px 0px'}}>
+        <input placeholder='Search' value={name} onChange={(e) => setName(e.target.value)} type="text" className="form-control" aria-label="Text input with dropdown button" />
         <div className="input-group-append">
           <Dropdown style={{backgroundColor:'#149CFF',borderRadius:'0px 21px 21px 0px'}}>
             <Dropdown.Toggle style={{color:'white',border:'none'}} variant="outline-secondary" id="dropdown-basic">
@@ -36,8 +38,6 @@ const ButtonDropDown = () => {
             </Dropdown.Toggle>
             <Dropdown.Menu>
               <Dropdown.Item onClick={() => handleDropdownItemClick('Name')}>Name</Dropdown.Item>
-              <Dropdown.Item onClick={() => handleDropdownItemClick('Full Name')}>Full Name</Dropdown.Item>
-              <Dropdown.Item onClick={() => handleDropdownItemClick('Code')}>Code</Dropdown.Item>
               <Dropdown.Item onClick={() => handleDropdownItemClick('Language')}>Language</Dropdown.Item>
               <Dropdown.Item onClick={() => handleDropdownItemClick('Capital')}>Capital</Dropdown.Item>
             </Dropdown.Menu>
@@ -47,5 +47,9 @@ const ButtonDropDown = () => {
       <button className='searchButton' onClick={handleSearchClick}>Search</button>
     </div>
   );
+
+
+
 };
-export default ButtonDropDown;
+
+export default ButtonDropdown;
